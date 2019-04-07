@@ -4,7 +4,8 @@ import Login from "./components/Login";
 import Register from "./components/Register";
 import {BrowserRouter as Router, Route } from "react-router-dom";
 import Landing from "./components/Landing";
-import Users from "./components/Users";
+import UserList from "./components/UserList";
+import Chat from "./components/Chat";
 
 class App extends Component {
     render() {
@@ -14,7 +15,8 @@ class App extends Component {
                     <Route exact path="/" component={Landing} />
                     <Route exact path="/register" component={Register} />
                     <Route exact path="/login" component={Login} />
-                    <Route exact path="/users" component={Users} />
+                    <Route exact path="/users" component={UserList} />
+                    <Route exact path="/chat" component={Chat} />
                 </div>
             </Router>
         );

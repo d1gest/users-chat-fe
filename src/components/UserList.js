@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 
-class Users extends Component {
+class UserList extends Component {
     constructor() {
         super();
         this.state = {
@@ -77,4 +77,4 @@ class Users extends Component {
     }
 }
 
-export default Users;
+export default UserList;
