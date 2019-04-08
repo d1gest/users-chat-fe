@@ -60,14 +60,16 @@ class UserList extends Component {
     render() {
         return (
             <div>
-                {this.state.data.map(item =>
-                    <div key={item.id}>
-                        <span>{item.id}</span>
-                        <span>{item.name}</span>
-                        <span>{item.username}</span>
-                        <span>{item.email}</span>
-                    </div>
-                )}
+                <ul>
+                    {this.state.data.map(item =>
+                        <li key={item.id}>
+                            <span>{item.id}</span>
+                            <span>{item.name}</span>
+                            <span>{item.username}</span>
+                            <span>{item.email}</span>
+                        </li>
+                    )}
+                </ul>
                 <button onClick={this.handlePrev}>Prev</button>
                 <button onClick={this.handleNext}>Next</button>
                 <input onChange={this.handleSizeChange}/>

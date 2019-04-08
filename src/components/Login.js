@@ -1,4 +1,5 @@
 import React, {Component} from "react";
+import {getUsername, setUsername} from "./UserContext";
 
 class Login extends Component {
     constructor() {
@@ -32,6 +33,11 @@ class Login extends Component {
                 .then(json => {
                     console.log(json);
                     localStorage.setItem("ACCESS_TOKEN", json.accessToken);
+                    console.log(getUsername());
+                    setUsername(this.state.usernameOrEmail);
+                    console.log(getUsername());
+
+                    //this.context = {username: this.state.usernameOrEmail};
                 }));
     }
 
@@ -45,7 +51,6 @@ class Login extends Component {
                 <form onSubmit={this.onSubmit}>
                     <input
                         type="text"
-                        className="form-control form-control-lg"
                         placeholder="Email Address or username"
                         name="usernameOrEmail"
                         value={this.state.usernameOrEmail}
@@ -53,13 +58,12 @@ class Login extends Component {
                     />
                     <input
                         type="password"
-                        className="form-control form-control-lg"
                         placeholder="Password"
                         name="password"
                         value={this.state.password}
                         onChange={this.onChange}
                     />
-                    <input type="submit" className="btn btn-info btn-block mt-4"/>
+                    <input type="submit"/>
                 </form>
             </div>
         );

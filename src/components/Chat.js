@@ -2,16 +2,21 @@ import React, {Component} from "react";
 import UserList from "./UserList";
 import MessageList from "./MessageList";
 import SockJS from "sockjs-client";
-import { Stomp } from '@stomp/stompjs';
+import {Stomp} from '@stomp/stompjs';
+import SendMessage from "./SendMessage";
+import {getUsername, UserContext} from "./UserContext";
 
 class Chat extends Component {
-
 
     constructor() {
         super();
         this.socket = new SockJS('http://localhost:8082/ws');
         this.stompClient = Stomp.over(this.socket);
-        console.log("Constructor " + this.stompClient);
+        this.state = {
+            messages: []
+        };
+
+
         this.onConnected = this.onConnected.bind(this);
         this.onMessageReceived = this.onMessageReceived.bind(this);
         this.sendMessage = this.sendMessage.bind(this);
@@ -25,15 +30,13 @@ class Chat extends Component {
     }
 
     onConnected() {
-        console.log("On connected " + this.stompClient);
-
         // Subscribe to the Public Topic
         this.stompClient.subscribe('/topic/public', this.onMessageReceived);
 
         // Tell your username to the server
         this.stompClient.send("/app/chat.addUser",
             {},
-            JSON.stringify({sender: "TEST", type: 'JOIN'})
+            JSON.stringify({sender: "TEST join", type: 'JOIN'})
         );
 
     }
@@ -42,32 +45,29 @@ class Chat extends Component {
 
     }
 
+    sendMessage(message) {
+        console.log(getUsername());
 
-    sendMessage(event) {
-        event.preventDefault();
         let chatMessage = {
-            sender: "ASDAD",
-            content: "ASDASD",
+            sender: getUsername(),
+            content: message,
             type: 'CHAT'
         };
 
         this.stompClient.send("/app/chat.sendMessage", {}, JSON.stringify(chatMessage));
-
     }
-
 
     onMessageReceived(payload) {
         let message = JSON.parse(payload.body);
-        console.log(message);
-
+        this.setState({messages: [...this.state.messages, message]});
     }
 
     render() {
         return (
             <div>
                 <UserList/>
-                <MessageList/>
-                <button onClick={this.sendMessage}/>
+                <MessageList messages ={this.state.messages}/>
+                <SendMessage sendMessage={this.sendMessage}/>
             </div>
 
         );
