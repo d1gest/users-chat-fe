@@ -61,7 +61,7 @@ class Chat extends Component {
 
     render() {
         return (
-            <div className="chat">
+            <div className="chat-container">
                 <UserList/>
                 <MessageList messages={this.state.messages}/>
                 <SendMessage sendMessage={this.sendMessage}/>

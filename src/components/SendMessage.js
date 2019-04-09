@@ -28,12 +28,14 @@ class SendMessage extends Component {
 
     render() {
         return (
-            <form onSubmit={this.handleSubmit}>
-                <input onChange={this.handleChange}
-                       value={this.state.message}
-                       placeholder={"Type your message and hit ENTER"}
-                       type="text"/>
-            </form>
+            <div className="send-message">
+                <form onSubmit={this.handleSubmit}>
+                    <input onChange={this.handleChange}
+                           value={this.state.message}
+                           placeholder={"Type your message and hit ENTER"}
+                           type="text"/>
+                </form>
+            </div>
         )
     }
 }

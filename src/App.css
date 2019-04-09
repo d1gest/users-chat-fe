@@ -32,19 +32,21 @@
     }
 }
 
-.userList {
-    color: #61dafb;
-    display: flex;
-    flex-direction: column;
+.chat-container {
+    display: grid;
+    grid-template-columns: 300px 1fr;
+    grid-template-rows: minmax(400px, 1000px) 40px;
 }
 
-.userListControls {
-    color: brown;
-    display: flex;
+.send-message {
+    background: #61dafb;
+    grid-column-start: 2;
 }
 
-.chat {
-    color: bisque;
-    display: flex;
-    flex-direction: row
+.message-list {
+    overflow-y: scroll;
+}
+
+.message {
+    margin: 15px 0;
 }
