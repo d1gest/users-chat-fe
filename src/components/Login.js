@@ -1,5 +1,4 @@
 import React, {Component} from "react";
-import {getUsername, setUsername} from "./UserContext";
 
 class Login extends Component {
     constructor() {
@@ -33,11 +32,7 @@ class Login extends Component {
                 .then(json => {
                     console.log(json);
                     localStorage.setItem("ACCESS_TOKEN", json.accessToken);
-                    console.log(getUsername());
-                    setUsername(this.state.usernameOrEmail);
-                    console.log(getUsername());
-
-                    //this.context = {username: this.state.usernameOrEmail};
+                    localStorage.setItem("USERNAME", this.state.usernameOrEmail);
                 }));
     }
 

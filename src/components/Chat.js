@@ -4,7 +4,6 @@ import MessageList from "./MessageList";
 import SockJS from "sockjs-client";
 import {Stomp} from '@stomp/stompjs';
 import SendMessage from "./SendMessage";
-import {getUsername, UserContext} from "./UserContext";
 
 class Chat extends Component {
 
@@ -46,10 +45,8 @@ class Chat extends Component {
     }
 
     sendMessage(message) {
-        console.log(getUsername());
-
         let chatMessage = {
-            sender: getUsername(),
+            sender: localStorage.getItem("USERNAME"),
             content: message,
             type: 'CHAT'
         };
@@ -64,9 +61,9 @@ class Chat extends Component {
 
     render() {
         return (
-            <div>
+            <div className="chat">
                 <UserList/>
-                <MessageList messages ={this.state.messages}/>
+                <MessageList messages={this.state.messages}/>
                 <SendMessage sendMessage={this.sendMessage}/>
             </div>
 

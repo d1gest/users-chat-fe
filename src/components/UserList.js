@@ -59,7 +59,7 @@ class UserList extends Component {
 
     render() {
         return (
-            <div>
+            <div className="userList">
                 <ul>
                     {this.state.data.map(item =>
                         <li key={item.id}>
@@ -70,9 +70,11 @@ class UserList extends Component {
                         </li>
                     )}
                 </ul>
-                <button onClick={this.handlePrev}>Prev</button>
-                <button onClick={this.handleNext}>Next</button>
-                <input onChange={this.handleSizeChange}/>
+                <div className="userListControls">
+                    <button onClick={this.handlePrev}>Prev</button>
+                    <button onClick={this.handleNext}>Next</button>
+                    <input onChange={this.handleSizeChange}/>
+                </div>
             </div>
 
         );
