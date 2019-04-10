@@ -15,17 +15,13 @@ class Chat extends Component {
             messages: []
         };
 
-
         this.onConnected = this.onConnected.bind(this);
         this.onMessageReceived = this.onMessageReceived.bind(this);
         this.sendMessage = this.sendMessage.bind(this);
-
     }
 
     componentDidMount() {
         this.stompClient.connect({}, this.onConnected, this.onError);
-        console.log("Did mount " + this.stompClient);
-
     }
 
     onConnected() {

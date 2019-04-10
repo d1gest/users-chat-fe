@@ -1,45 +1,10 @@
-.App {
-    text-align: center;
-}
-
-.App-logo {
-    animation: App-logo-spin infinite 20s linear;
-    height: 40vmin;
-    pointer-events: none;
-}
-
-.App-header {
-    background-color: #282c34;
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    font-size: calc(10px + 2vmin);
-    color: white;
-}
-
-.App-link {
-    color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-    from {
-        transform: rotate(0deg);
-    }
-    to {
-        transform: rotate(360deg);
-    }
-}
-
 .chat-container {
     display: grid;
     grid-template-columns: 300px 1fr;
-    grid-template-rows: minmax(400px, 1000px) 40px;
+    grid-template-rows: minmax(400px, 600px) 40px;
 }
 
 .send-message {
-    background: #61dafb;
     grid-column-start: 2;
 }
 
@@ -48,5 +13,22 @@
 }
 
 .message {
+    display: grid;
+    grid-template-columns: 200px 1fr;
     margin: 15px 0;
+}
+
+.message-sender {
+    color: dimgray;
+    grid-column-start: 1;
+}
+
+.message-content {
+    grid-column-start: 2;
+    text-align: left;
+}
+
+.message-input {
+    width: 95%;
+    height: 40px;
 }
