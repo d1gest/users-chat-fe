@@ -21,15 +21,21 @@ class Chat extends Component {
     }
 
     componentDidMount() {
-        this.stompClient.connect({}, this.onConnected, this.onError);
+        var headers = {};
+        headers['Authorization'] = 'Bearer ' + localStorage.getItem("ACCESS_TOKEN");
+/*        const headers = new StompHeaders({
+            'Authorization': 'Bearer ' + localStorage.getItem("ACCESS_TOKEN")
+        });*/
+        this.stompClient.connect(headers, this.onConnected, this.onError);
     }
 
     onConnected() {
         // Subscribe to the Public Topic
-        this.stompClient.subscribe('/topic/public', this.onMessageReceived);
+        //this.stompClient.subscribe('/chat', this.onMessageReceived);
+        this.stompClient.subscribe('/user/chat', this.onMessageReceived);
 
         // Tell your username to the server
-        this.stompClient.send("/app/chat.addUser",
+        this.stompClient.send("/chat.addUser",
             {},
             JSON.stringify({sender: "TEST join", type: 'JOIN'})
         );
@@ -47,7 +53,9 @@ class Chat extends Component {
             type: 'CHAT'
         };
 
-        this.stompClient.send("/app/chat.sendMessage", {}, JSON.stringify(chatMessage));
+        //this.stompClient.send("/chat.sendMessage", {}, JSON.stringify(chatMessage));
+        this.stompClient.send("/chat.sendPrivateMessage", {}, JSON.stringify(chatMessage));
+
     }
 
     onMessageReceived(payload) {
